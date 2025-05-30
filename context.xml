@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+		<Resource
+			name="jdbc"
+			auth="Containet"
+			type="javax.sql.DataSource"
+			driverClassName="oracle.jdbc.driver.OracleDriver"
+			url="jdbc:oracle:thin:tomoya@//localhost:1521/xe"
+			username="tomoya"
+			password="pass9464"
+		>
+		</Resource>
+</Context>
+
