@@ -34,7 +34,7 @@ public class NewProduct extends HttpServlet {
             Connection con = ds.getConnection();
             
             //sqlでカテゴリーの名前とIDを取得する
-            String sql = "SELECT CATEGORYName,CategoryID FROM CATEGORIES GROUP BY CATEGORYName,CATEGORYID ORDER BY CATEGORYID";
+            String sql = "SELECT CATEGORYNAME,CATEGORYID FROM CATEGORIES GROUP BY CATEGORYNAME,CATEGORYID ORDER BY CATEGORYID";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             
@@ -92,15 +92,17 @@ public class NewProduct extends HttpServlet {
         List<NewProductBean> newProductList = new ArrayList<NewProductBean>();
         
         try {
+            //データベースの接続
             InitialContext ic = new InitialContext();
             DataSource ds = (DataSource) ic.lookup("java:/comp/env/jdbc");
             Connection con = ds.getConnection();
             
-            
-            String sql1 = "SELECT CATEGORYName,CategoryID FROM CATEGORIES GROUP BY CATEGORYName,CATEGORYID ORDER BY CATEGORYID";
+            //SQL文を作り実行する
+            String sql1 = "SELECT CATEGORYNAME,CATEGORYID FROM CATEGORIES GROUP BY CATEGORYNAME,CATEGORYID ORDER BY CATEGORYID";
             PreparedStatement st1 = con.prepareStatement(sql1);
             ResultSet rs = st1.executeQuery();
 
+            //Beanのセッターに一行ずつ情報を格納する。その後、リストに格納する
             while (rs.next()) {
                 NewProductBean ProductBean = new NewProductBean();
                 ProductBean.setCategoryID(rs.getInt("CategoryID"));
